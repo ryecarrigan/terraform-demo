@@ -4,8 +4,7 @@ resource "aws_iam_instance_profile" "ecs" {
 }
 
 resource "aws_iam_role" "ecs" {
-  name = "EcsInstanceRole"
-
+  name               = "EcsInstanceRole"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -24,8 +23,8 @@ EOF
 }
 
 resource "aws_iam_role_policy" "ecs" {
-  name = "EcsInstancePolicy"
-  role = "${aws_iam_role.ecs.id}"
+  name   = "EcsInstancePolicy"
+  role   = "${aws_iam_role.ecs.id}"
   policy = <<EOF
 {
   "Version": "2012-10-17",

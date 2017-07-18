@@ -1,13 +1,14 @@
 // Create a route table for the public subnets with direct access to the Internet.
 resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.main.id}"
+
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.main.id}"
   }
 
   tags {
-    Name = "Public-RT"
+    Name = "${var.prefix}: Public-RT"
   }
 }
 
@@ -26,13 +27,14 @@ resource "aws_route_table_association" "public_b" {
 // Create a route table for the private subnets to access the NAT instance in the public subnet.
 resource "aws_route_table" "private" {
   vpc_id = "${aws_vpc.main.id}"
+
   route {
     cidr_block  = "0.0.0.0/0"
     instance_id = "${aws_instance.nat.id}"
   }
 
   tags {
-    Name = "Private-RT"
+    Name = "${var.prefix}: Private-RT"
   }
 }
 
