@@ -8,3 +8,5 @@
 # IDEA
 .idea/
 terraform.tfvars
+
+.env
