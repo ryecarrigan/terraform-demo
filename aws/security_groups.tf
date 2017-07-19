@@ -37,6 +37,27 @@ resource "aws_security_group" "nat" {
   }
 }
 
+// Create a security group to allow PostgreSQL traffic around the VPC.
+resource "aws_security_group" "postgres" {
+  name        = "postgres"
+  description = "Allow PostgreSQL traffic"
+  vpc_id      = "${aws_vpc.primary.id}"
+
+  egress {
+    cidr_blocks = ["10.0.0.0/16"]
+    from_port   = 5432
+    protocol    = "tcp"
+    to_port     = 5432
+  }
+
+  ingress {
+    cidr_blocks = ["10.0.0.0/16"]
+    from_port   = 5432
+    protocol    = "tcp"
+    to_port     = 5432
+  }
+}
+
 // Create a security group to restrict SSH access to originate from a provided public IP.
 resource "aws_security_group" "ssh" {
   name        = "ssh-restricted"
@@ -44,14 +65,14 @@ resource "aws_security_group" "ssh" {
   vpc_id      = "${aws_vpc.primary.id}"
 
   ingress {
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = "${var.ssh_cidr}"
     from_port   = 22
     protocol    = "tcp"
     to_port     = 22
   }
 
   egress {
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = "${var.ssh_cidr}"
     from_port   = 22
     protocol    = "tcp"
     to_port     = 22
@@ -65,7 +86,7 @@ resource "aws_security_group" "ssh" {
 // Create a security group to allow unrestricted egress around the VPC.
 resource "aws_security_group" "vpc" {
   name        = "vpc-egress"
-  description = "Allow egress from VPC instances to the Internet."
+  description = "Allow outbound traffic from VPC instances to anywhere."
   vpc_id      = "${aws_vpc.primary.id}"
 
   egress {

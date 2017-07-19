@@ -5,7 +5,7 @@ resource "aws_launch_configuration" "ecs" {
   image_id                    = "${data.aws_ami.node.id}"
   instance_type               = "t2.nano"
   key_name                    = "${var.key_name}"
-  security_groups             = ["${aws_security_group.ssh.id}", "${aws_security_group.vpc.id}"]
+  security_groups             = ["${aws_security_group.ssh.id}", "${aws_security_group.postgres.id}", "${aws_security_group.vpc.id}"]
   user_data                   = "#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.web_app.name} >> /etc/ecs/ecs.config"
 
   lifecycle {

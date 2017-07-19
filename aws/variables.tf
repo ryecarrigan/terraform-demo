@@ -1,7 +1,9 @@
+// Create variables for the database username and password
+variable "db_password" {}
+variable "db_username" {}
+
 // Create a variable to store the key name for instances.
-variable "key_name" {
-  type    = "string"
-}
+variable "key_name" {}
 
 // Common prefix for all generated resources.
 variable "prefix" {
@@ -13,4 +15,10 @@ variable "prefix" {
 variable "region" {
   type    = "string"
   default = "ca-central-1"
+}
+
+// Create a variable for the required origin for SSH connections.
+variable "ssh_cidr" {
+  type    = "list"
+  default = ["0.0.0.0/0"]
 }
