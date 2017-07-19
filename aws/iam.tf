@@ -1,10 +1,10 @@
 resource "aws_iam_instance_profile" "ecs" {
-  name = "EcsInstanceProfile"
+  name = "${var.prefix}_EcsInstanceProfile"
   role = "${aws_iam_role.ecs.name}"
 }
 
 resource "aws_iam_role" "ecs" {
-  name               = "EcsInstanceRole"
+  name               = "${var.prefix}_EcsInstanceRole"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -23,7 +23,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "ecs" {
-  name   = "EcsInstancePolicy"
+  name   = "${var.prefix}_EcsInstancePolicy"
   role   = "${aws_iam_role.ecs.id}"
   policy = <<EOF
 {

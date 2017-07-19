@@ -2,7 +2,7 @@
 resource "aws_security_group" "nat" {
   name        = "nat"
   description = "Allow HTTP/S access to the NAT instance from the private subnets."
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${aws_vpc.primary.id}"
 
   egress {
     cidr_blocks = ["${aws_subnet.private_a.cidr_block}", "${aws_subnet.private_b.cidr_block}"]
@@ -41,7 +41,7 @@ resource "aws_security_group" "nat" {
 resource "aws_security_group" "ssh" {
   name        = "ssh-restricted"
   description = "Restrict allowed SSH connections."
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${aws_vpc.primary.id}"
 
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
@@ -66,7 +66,7 @@ resource "aws_security_group" "ssh" {
 resource "aws_security_group" "vpc" {
   name        = "vpc-egress"
   description = "Allow egress from VPC instances to the Internet."
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${aws_vpc.primary.id}"
 
   egress {
     cidr_blocks = ["0.0.0.0/0"]

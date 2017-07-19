@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "ecs" {
-  name_prefix                 = "ecs-conf-"
+  name_prefix                 = "${var.prefix}_ecs-conf-"
   associate_public_ip_address = false
   iam_instance_profile        = "${aws_iam_instance_profile.ecs.name}"
   image_id                    = "${data.aws_ami.node.id}"
