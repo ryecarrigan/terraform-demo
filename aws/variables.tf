@@ -1,4 +1,5 @@
-// Create variables for the database username and password
+// Create variables for the database name, username, and password
+variable "db_database" {}
 variable "db_password" {}
 variable "db_username" {}
 
@@ -20,5 +21,5 @@ variable "region" {
 // Create a variable for the required origin for SSH connections.
 variable "ssh_cidr" {
   type    = "list"
-  default = ["0.0.0.0/0"]
+  default = ["10.0.0.0/16"]
 }

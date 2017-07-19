@@ -1,0 +1,17 @@
+[
+  {
+    "name": "web_app",
+    "image": "rypcarr/terraform-demo",
+    "cpu": 1,
+    "memory": 128,
+    "environment": [
+    ],
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80
+      }
+    ]
+  }
+]

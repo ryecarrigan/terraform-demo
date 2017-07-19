@@ -16,7 +16,7 @@ resource "aws_db_instance" "postgres" {
   final_snapshot_identifier = "postgres-final"
   instance_class            = "db.t2.micro"
   multi_az                  = true
-  name                      = "appdata"
+  name                      = "${var.db_database}"
   password                  = "${var.db_password}"
   publicly_accessible       = false
   storage_type              = "gp2"
