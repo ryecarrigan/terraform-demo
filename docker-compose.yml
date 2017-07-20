@@ -3,7 +3,8 @@ version: '2'
 services:
   frontend:
     image: rypcarr/tf-demo-frontend
-    env_file: .env
+    environment:
+      - BACKEND_HOST=${BACKEND_HOST}
     ports:
       - "8080:80"
     depends_on:
@@ -12,7 +13,6 @@ services:
       - backend
     networks:
       tfdemo:
-
   backend:
     image: rypcarr/tf-demo-backend
     env_file: .env
@@ -24,7 +24,8 @@ services:
       - postgres
     networks:
       tfdemo:
-        aliases: backend
+        aliases:
+          - backend
 
   postgres:
     image: postgres:9
