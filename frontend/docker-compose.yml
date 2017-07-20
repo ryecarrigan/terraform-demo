@@ -1,0 +1,6 @@
+version: '2'
+
+services:
+  backend:
+    build: .
+    image: rypcarr/tf-demo-frontend

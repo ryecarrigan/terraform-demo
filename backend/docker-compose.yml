@@ -4,26 +4,3 @@ services:
   webapp:
     build: .
     image: rypcarr/tf-demo-backend
-    env_file: .env
-    ports:
-      - "8080:80"
-    depends_on:
-      - postgres
-    links:
-      - postgres
-    networks:
-      tfdemo:
-
-  postgres:
-    image: postgres:9
-    env_file: .env
-    expose:
-      - 5432
-    networks:
-      tfdemo:
-        aliases:
-          - postgres
-
-networks:
-  tfdemo:
-    driver: bridge
