@@ -1,8 +1,8 @@
 [
   {
-    "name": "web_app",
+    "name": "frontend",
     "image": "rypcarr/terraform-demo",
-    "cpu": 1,
+    "cpu": 512,
     "memory": 128,
     "environment": [
     ],

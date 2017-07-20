@@ -1,3 +1,17 @@
+// Create a security group to allows HTTP traffic from anywhere to the ALB.
+resource "aws_security_group" "alb" {
+  description = "Allow HTTP traffic into the ALB"
+  name        = "http"
+  vpc_id      = "${aws_vpc.primary.id}"
+
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 80
+    protocol    = "tcp"
+    to_port     = 80
+  }
+}
+
 // Create a security group to allow HTTP/S access from the NAT instance.
 resource "aws_security_group" "nat" {
   name        = "nat"
