@@ -13,9 +13,7 @@ The frontend service makes a request to the backend service, which attempts a
 connection to the database server and responds with its connection status.
 
 If both connections are successful, then the frontend will display the message:
-```
-Connection OK; waiting to send.
-```
+> Connection OK; waiting to send.
 
 ### Testing
 The web application can be built and run locally, given that you have `docker`
@@ -38,17 +36,14 @@ application. You can also run `make test` to output a comparison using cURL.
 The network is broken down like this:
 * VPC (10.0.0.0/16)
   * Public subnet in first AZ (10.0.10.0/24)
-  * Private subnet in first AZ (10.0.11.0/24)
   * Public subnet in second AZ (10.0.20.0/24)
+  * Private subnet in first AZ (10.0.11.0/24)
   * Private subnet in second AZ (10.0.21.0/24)
 * EC2
   * NAT instance in a public subnet
-  * EC2 Container Service
-    * Frontend cluster
-      * One instance in each public subnet
-    * Backend cluster
-      * One instance in each private subnet
-    * The application is deployed as load-balanced ECS services.
+* EC2 Container Service
+  * Load-balanced frontend cluster with nodes in the public subnets
+  * Load-balanced backend cluster with nodes in the private subnets
 * RDS
   * Multi-AZ PostgreSQL instance in the private subnets
 
@@ -69,15 +64,17 @@ Run `make plan` to create an execution plan from the Terraform configuration.
 When ready to launch, run `make deploy` to begin. (While all instances in the
 demo are configured to be nano or micro, you will incur some AWS charges!)
 
-The Terraform build should take 10-15 minutes (the multi-AZ RDS instance being
+The Terraform build should take 12-15 minutes (the multi-AZ RDS instance being
 the most time-consuming), and when the process is complete the DNS name of the
 frontend load balancer will be included in the output.
 
-It may take a minute or two for the ECS services to start their tasks and
-establish connections to the application load balancers. 
+It may take a minute or two after the stack is created for the ECS services to
+start their tasks and establish connections to the application load balancers. 
 
-Once everything is in place, navigating to the frontend URL in a browser should
-result in the seeing the expected message from the application:
-```
-Connection OK; waiting to send.
-```
+Once everything is in place, navigating to the frontend load balancer URL in a
+browser should result in the seeing the expected message from the application:
+> Connection OK; waiting to send.
+
+### Destruction
+To destroy the demo environment, run the command `make destroy` and type "yes"
+to confirm. The destruction process should take 5-7 minutes.
