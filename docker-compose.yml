@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+  frontend:
+    image: rypcarr/tf-demo-frontend
+    environment:
+      - BACKEND_HOST=${BACKEND_HOST}
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    links:
+      - backend
+    networks:
+      tfdemo:
+  backend:
+    image: rypcarr/tf-demo-backend
+    env_file: .env
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    networks:
+      tfdemo:
+        aliases:
+          - backend
+
+  postgres:
+    image: postgres:9
+    env_file: .env
+    expose:
+      - 5432
+    networks:
+      tfdemo:
+        aliases:
+          - postgres
+
+networks:
+  tfdemo:
+    driver: bridge

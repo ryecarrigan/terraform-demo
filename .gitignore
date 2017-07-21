@@ -4,3 +4,9 @@
 
 # Module directory
 .terraform/
+
+# IDEA
+.idea/
+terraform.tfvars
+
+.env
