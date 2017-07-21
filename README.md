@@ -40,8 +40,7 @@ The network is broken down like this:
 ### Deployment
 The network can be deployed using AWS credentials with permissions to create resources.
 
-Note: for this demo, the images for the web application are pre-built and will be pulled from 
-[Docker Hub](https://hub.docker.com/u/rypcarr).
+Note: for this demo, the images for the web application are pre-built and will be pulled from [Docker Hub](https://hub.docker.com/u/rypcarr).
 
 Create a `terraform.tfvars` file from a copy of `terraform.tfvars.example` and set the values as desired.
 Like with local testing, the database values will both be used to initialize the database and be provided to the
@@ -52,6 +51,3 @@ to begin. (While all instances in the demo are configurated to be nano or micro,
 
 The Terraform build should take 10-15 minutes (the multi-AZ RDS instance being the most time-consuming), and when the
 process is complete the DNS name of the frontend load balancer will be included in the output.
-
-After the Terraform build, allow a few more minutes for the ECS services to start their tasks and register with load
-balancing target groups. (During this time, accessing the public DNS will return a 503.) 

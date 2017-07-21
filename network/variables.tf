@@ -1,3 +1,7 @@
+// Create variables for the AWS access and secret keys
+variable "access_key" {}
+variable "secret_key" {}
+
 // Create variables for the database name, username, and password
 variable "db_database" {}
 variable "db_password" {}

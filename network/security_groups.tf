@@ -1,11 +1,39 @@
 // Create a security group to allows HTTP traffic from anywhere to the ALB.
-resource "aws_security_group" "alb" {
+resource "aws_security_group" "http_public" {
   description = "Allow HTTP traffic into the ALB"
-  name        = "http"
+  name        = "http_public"
   vpc_id      = "${aws_vpc.primary.id}"
+
+  egress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 80
+    protocol    = "tcp"
+    to_port     = 80
+  }
 
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 80
+    protocol    = "tcp"
+    to_port     = 80
+  }
+}
+
+// Create a security group to allows HTTP traffic from the VPC to the ALB.
+resource "aws_security_group" "http_private" {
+  description = "Allow HTTP traffic into the ALB"
+  name        = "http_private"
+  vpc_id      = "${aws_vpc.primary.id}"
+
+  egress {
+    cidr_blocks = ["10.0.0.0/16"]
+    from_port   = 80
+    protocol    = "tcp"
+    to_port     = 80
+  }
+
+  ingress {
+    cidr_blocks = ["10.0.0.0/16"]
     from_port   = 80
     protocol    = "tcp"
     to_port     = 80
