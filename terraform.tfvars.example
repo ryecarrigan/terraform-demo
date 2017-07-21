@@ -1,0 +1,16 @@
+# AWS keys for programmatic access
+access_key = ""
+secret_key = ""
+
+# Name of the key file for SSH connection to instances
+key_name = ""
+
+# Information to initialise the new Postgres database
+db_database = ""
+db_password = ""
+db_username = ""
+
+# These variables have defaults but can be uncommented and overridden here as desired
+//prefix = "tf-demo"
+//region = "ca-central-1"
+//ssh_cidr = ["0.0.0.0/0"]

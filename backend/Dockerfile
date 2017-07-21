@@ -6,4 +6,4 @@ RUN { \
     docker-php-ext-install pdo pdo_pgsql; \
 }
 
-COPY index.php /var/www/html/index.php
+COPY html/ /var/www/html/
