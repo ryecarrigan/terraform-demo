@@ -3,13 +3,13 @@ This is a demonstration of running a secure web application in an isolated AWS V
 
 ## Application
 The web application is very simple:
- * Frontend server
- * Backend server
+ * "Frontend" web service
+ * "Backend" web service
  * Database server
 
 The frontend has no direct communication with the database server.
 
-The frontend server makes a request to the backend service, which attempts a
+The frontend service makes a request to the backend service, which attempts a
 connection to the database server and responds with its connection status.
 
 If both connections are successful, then the frontend will display the message:
@@ -21,9 +21,10 @@ Connection OK; waiting to send.
 The web application can be built and run locally, given that you have `docker`
 and `docker-compose` available.
 
-Create a `.env` file from a copy of `.env.example` and set the values as
-desired. (In a local environment, the Postgres database, username, and password
-are mostly arbitrary as they are set on the database container at launch time.)
+Run `make env` to create a file called `.env` from a copy of `.env.example`.
+You can set these values as desired but, in a local environment, the Postgres
+database name, username, and password are mostly arbitrary as they are set on
+the database container at launch time.)
 
 Run `make` (or `make images`) to build both the frontend and backend servers,
 then `make up` to launch them. Once running, the application can be verified by
@@ -58,10 +59,11 @@ resources.
 Note: for this demo, the images for the web application are pre-built and will
 be pulled from [Docker Hub](https://hub.docker.com/u/rypcarr).
 
-Create a `terraform.tfvars` file from a copy of `terraform.tfvars.example` and
-set the values as desired. As with local testing above, the database values
-will both be used to initialize the database and be provided to the backend
-application for its connection to the new database.
+Run `make env` to create a file called `terraform.tfvars` from a copy of
+`terraform.tfvars.example`. Set the values as desired. As with local testing
+from before, the database values will both be used to initialize the database
+and be provided to the backend application for its connection to the new
+database.
 
 Run `make plan` to create an execution plan from the Terraform configuration.
 When ready to launch, run `make deploy` to begin. (While all instances in the

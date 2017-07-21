@@ -1,6 +1,11 @@
 # Default goal is to build the frontend and backend images
 images : front back
 
+# Make copies of the environment configuration
+env :
+	cp .env.example .env
+	cp terraform.tfvars.example terraform.tfvars
+
 # Goals for testing the web app locally
 back :
 	docker-compose -f backend/docker-compose.yml build
