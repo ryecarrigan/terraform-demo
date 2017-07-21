@@ -14,7 +14,7 @@ resource "aws_db_instance" "postgres" {
   engine                 = "postgres"
   engine_version         = "9.6.3"
   instance_class         = "db.t2.micro"
-  multi_az               = false
+  multi_az               = true
   name                   = "${var.db_database}"
   password               = "${var.db_password}"
   publicly_accessible    = false
