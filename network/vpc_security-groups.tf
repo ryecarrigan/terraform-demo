@@ -107,14 +107,14 @@ resource "aws_security_group" "ssh" {
   vpc_id      = "${aws_vpc.primary.id}"
 
   ingress {
-    cidr_blocks = "${var.ssh_cidr}"
+    cidr_blocks = ["${var.ssh_cidr}"]
     from_port   = 22
     protocol    = "tcp"
     to_port     = 22
   }
 
   egress {
-    cidr_blocks = "${var.ssh_cidr}"
+    cidr_blocks = ["${var.ssh_cidr}"]
     from_port   = 22
     protocol    = "tcp"
     to_port     = 22

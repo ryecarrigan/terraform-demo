@@ -24,6 +24,6 @@ variable "region" {
 
 // Create a variable for the required origin for SSH connections.
 variable "ssh_cidr" {
-  type    = "list"
-  default = ["10.0.0.0/16"]
+  type    = "string"
+  default = "10.0.0.0/16"
 }
